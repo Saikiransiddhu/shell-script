@@ -10,7 +10,6 @@ R="\e[31m"
 G="\e[32m"
 N="\e[30m"
 Y="\e[31m"
-
 if [$USERID -ne 0];
 then
     echo -e "$R ERROR:: Please run this script with root access $N"
