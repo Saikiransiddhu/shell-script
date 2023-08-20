@@ -1,15 +1,23 @@
-def is_palindrome(word):
-    # Convert the word to lowercase and remove non-alphanumeric characters
-    cleaned_word = ''.join(c for c in word.lower() if c.isalnum())
+#!/bin/bash
+
+is_palindrome() {
+    local word="$1"
+    local cleaned_word=$(echo "$word" | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]')
     
-    # Compare the cleaned word with its reverse
-    return cleaned_word == cleaned_word[::-1]
+    local reversed_word=$(echo "$cleaned_word" | rev)
+    
+    if [ "$cleaned_word" == "$reversed_word" ]; then
+        return 0  # Palindrome
+    else
+        return 1  # Not a palindrome
+    fi
+}
 
-# Get input from the user
-input_word = input("Enter a word or phrase: ")
+echo -n "Enter a word or phrase: "
+read input_word
 
-# Check if the input is a palindrome
-if is_palindrome(input_word):
-    print(f"'{input_word}' is a palindrome!")
-else:
-    print(f"'{input_word}' is not a palindrome.")
+if is_palindrome "$input_word"; then
+    echo "'$input_word' is a palindrome!"
+else
+    echo "'$input_word' is not a palindrome."
+fi
